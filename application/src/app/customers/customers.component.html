@@ -1,0 +1,19 @@
+<table class="customer-table">
+    <thead>
+      <tr>
+        <th class="customer-table-header">Name</th>
+        <th class="customer-table-header">Company Name</th>
+        <th class="customer-table-header">Phone</th>
+        <th class="customer-table-header">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let customer of customers">
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.companyName }}</td>
+        <td>{{ customer.phone }}</td>
+        <td>{{ customer.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
