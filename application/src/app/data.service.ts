@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Customer } from './Customer';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class DataService {
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
 
-  getData() {
-    return this.http.get('https://localhost:7274/api/customers');
-  }
+    getData() {
+        console.log("==================================")
+
+        //return this.http.get('https://localhost:5153/api/customers');
+        return this.http.get<Customer[]>('https://localhost:7274/api/customer');
+    }
+
+
 }

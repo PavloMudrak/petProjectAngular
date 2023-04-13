@@ -1,17 +1,27 @@
 import { Component } from '@angular/core';
 import { DataService } from './data.service';
+import { Customer } from './Customer';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor(private dataService: DataService) {}
+  title = 'Customer.UI';
+  customers: Customer[] = [];
+  heroToEdit?: Customer;
 
-  getData() {
-    this.dataService.getData().subscribe((data: any) => {
-      console.log(data);
-    });
+  constructor(private svc: DataService) { }
+
+  ngOnInit(): void {
+    this.svc
+      .getData()
+      .subscribe((result: Customer[]) => {
+        console.log(result);
+        this.customers = result
+      });
   }
+
+  
 }
