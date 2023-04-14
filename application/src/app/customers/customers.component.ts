@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Customer } from '../Customer';
 import { DataService } from '../data.service';
+import { CustomerService } from './customers.service';
 
 @Component({
   selector: 'app-customers',
@@ -12,7 +13,7 @@ export class CustomersComponent {
   customers: Customer[] = [];
   heroToEdit?: Customer;
 
-  constructor(private svc: DataService) { }
+  constructor(private svc: CustomerService) { }
 
   ngOnInit(): void {
     this.svc
@@ -22,4 +23,14 @@ export class CustomersComponent {
         this.customers = result
       });
   }
+
+  deleteCustomer(customerName: string) {
+    this.svc.deleteCustomer(customerName).subscribe(() => {
+      // Оновити список клієнтів після видалення
+      this.customers = this.customers.filter(customer => customer.name !== customerName);
+    });
+  }
+  
+  
+
 }

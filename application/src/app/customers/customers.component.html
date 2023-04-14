@@ -5,15 +5,19 @@
         <th class="customer-table-header">Company Name</th>
         <th class="customer-table-header">Phone</th>
         <th class="customer-table-header">Email</th>
+        <th class="customer-table-header"></th>
+        <th class="customer-table-header"></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let customer of customers">
-        <td>{{ customer.name }}</td>
-        <td>{{ customer.companyName }}</td>
-        <td>{{ customer.phone }}</td>
-        <td>{{ customer.email }}</td>
-      </tr>
-    </tbody>
+        <tr *ngFor="let customer of customers">
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.companyName }}</td>
+          <td>{{ customer.phone }}</td>
+          <td>{{ customer.email }}</td>
+          <td><button class="edit-button" id="edit-{{customer.name}}">Edit</button></td>
+          <td><button class="delete-button" id="delete-{{customer.name}}" (click)="deleteCustomer(customer.name)">Delete</button></td>
+        </tr>
+      </tbody>
   </table>
   

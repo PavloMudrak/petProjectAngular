@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Customer } from '../Customer';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -12,5 +13,10 @@ export class CustomerService {
         return this.http.get<Customer[]>('https://localhost:7274/api/customer');
     }
 
+    public deleteCustomer(name: string): Observable<void> {
+        const url = `https://localhost:7274/api/customer/${name}`;
+        return this.http.delete<void>(url);
+      }
+      
 
 }
