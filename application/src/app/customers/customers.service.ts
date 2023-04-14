@@ -18,13 +18,8 @@ export class CustomerService {
         return this.http.delete<void>(url);
     }
 
-    searchCustomers(searchTerm: string, pageSize: number) {
-        return this.http.get<Customer[]>(`https://localhost:7274/api/customer/search?searchTerm=${searchTerm}&pageSize=${pageSize}`);
+    searchCustomers(searchTerm: string, pageSize: number, pageIndex: number) {
+        return this.http.get<Customer[]>(`https://localhost:7274/api/customer/search?searchTerm=${searchTerm}&pageSize=${pageSize}&pageIndex=${pageIndex}`);
     }
-
-    getFirstPage(pageSize: number) {
-        return this.http.get<Customer[]>(`https://localhost:7274/api/customer/search?pageSize=${pageSize}`);
-    }
-
 
 }

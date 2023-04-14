@@ -30,13 +30,10 @@
   </tbody>
 </table>
 <div class="pagging-options">
-  <u style="margin-right: 50px;"> <-- Previous page</u>
+  <button style="margin-right: 50px;" (click)="previousPage()" [disabled]="currentPageIndex === 1"><-- Previous page</button>
 
   <div>
-    <span>Current page: 1</span>
-    <!-- <select [(ngModel)]="pageSize">
-      <option *ngFor="let option of pageSizeOptions" [value]="option">{{ option }}</option>
-    </select> -->
+    <span>Current page: {{this.currentPageIndex}} </span>
   </div>
 
   <div style="margin-left: 20px;">
@@ -46,6 +43,6 @@
     </select>
   </div>
 
-  <u style="margin-left: 50px;">Next page --></u>
+  <button style="margin-left: 50px;" (click)="nextPage()" [disabled]="currentPageIndex === pagesCount">Next page --></button>
 
 </div>
