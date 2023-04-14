@@ -18,28 +18,34 @@ import { trigger } from '@angular/animations';
 })
 export class CustomersComponent {
   title = 'Customer.UI';
-  firstCustomers: Customer[] = [];
   searchTerm: string = '';
+
+  sortColumn: string = 'Name';
+  sortOrder: string = 'ASC';
+  sortColumnOptions: string[] = ["Name", "CompanyName", "Phone", "Email"];
+  sortOrderOptions: string[] = ["ASC", "DESC"];
+
+  firstCustomers: Customer[] = [];
   filteredCustomers: Customer[] = [];
-  pageSizeOptions: number[] = [5, 10, 14];
-  pageIndex: number = 0;
-  pageSize: number = 10;
-  length: number = 0;
-  currentPageIndex = 1;
+
+  pageSizeOptions: number[] = [5, 10];
+  pageIndex: number = 1;
+  pageSize: number = 0;
   pagesCount = 10;
 
   constructor(private svc: CustomerService) { }
 
   ngOnInit() {
+    this.sortColumn = this.sortColumnOptions[0];
+    this.pageSize = this.pageSizeOptions[1];
     this.getCustomersByOptions();
     this.setPagesCount();
   }
 
   onSearchChange(searchTerm: string) {
     this.searchTerm = searchTerm;
-    this.pageIndex = 0;
+    this.pageIndex = 1;
     this.getCustomersByOptions();
-    this.setPagesCount();
   }
 
 
@@ -49,47 +55,57 @@ export class CustomersComponent {
     this.setPagesCount();
   }
 
+  onSortColumnChange(sortColumn: string) {
+    this.sortColumn = sortColumn;
+    this.getCustomersByOptions();
+  }
+
+  onSortOrderChange(sortOrder: string) {
+    this.sortOrder = sortOrder;
+    this.pageIndex = 1;
+    this.getCustomersByOptions();
+  }
+
   deleteCustomer(customerName: string) {
     this.svc.deleteCustomer(customerName).subscribe(() => {
       this.filteredCustomers = this.filteredCustomers.filter(customer => customer.name !== customerName);
     });
+    this.setPagesCount();
   }
 
   public clearSearchTerm() {
     this.pageIndex = 1;
     this.searchTerm = "";
     this.getCustomersByOptions();
-    this.setPagesCount();
   }
 
   public nextPage() {
-    this.currentPageIndex += 1;
+    this.pageIndex += 1;
+    console.log(this.pageIndex)
     this.getCustomersByOptions();
   }
 
   public previousPage() {
-    this.currentPageIndex -= 1;
+    this.pageIndex -= 1;
     this.getCustomersByOptions();
   }
 
   public goToPage(pageIndex: number) {
     if (pageIndex == 1)
-      this.currentPageIndex = 1;
+      this.pageIndex = 1;
     else
-      this.currentPageIndex = this.pagesCount;
-
+      this.pageIndex = this.pagesCount;
     this.getCustomersByOptions();
   }
 
   private getCustomersByOptions() {
-    this.svc.searchCustomers(this.searchTerm, this.pageSize, this.currentPageIndex).subscribe((result: Customer[]) => {
+    this.svc.searchCustomers(this.searchTerm, this.pageSize, this.pageIndex, this.sortColumn, this.sortOrder).subscribe((result: Customer[]) => {
       this.filteredCustomers = result;
     });
   }
 
-  private setPagesCount()
-  {
-    this.svc.getPagesCount(this.searchTerm, this.pageSize, this.currentPageIndex).subscribe((result) => {
+  private setPagesCount() {
+    this.svc.getPagesCount(this.pageSize).subscribe((result) => {
       this.pagesCount = result;
     });
   }

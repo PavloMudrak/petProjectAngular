@@ -1,5 +1,3 @@
-
-
 <table class="customer-table">
   <thead>
     <tr>
@@ -18,32 +16,52 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let customer of filteredCustomers | slice: pageIndex * pageSize:(pageIndex + 1) * pageSize">
-      <td >{{ customer.name }}</td>
-      <td >{{ customer.companyName }}</td>
-      <td >{{ customer.phone }}</td>
-      <td >{{ customer.email }}</td>
+    <tr *ngFor="let customer of filteredCustomers">
+      <td>{{ customer.name }}</td>
+      <td>{{ customer.companyName }}</td>
+      <td>{{ customer.phone }}</td>
+      <td>{{ customer.email }}</td>
       <td><button class="edit-button" id="edit-{{customer.name}}">Edit</button></td>
       <td><button class="delete-button" id="delete-{{customer.name}}"
           (click)="deleteCustomer(customer.name)">Delete</button></td>
     </tr>
   </tbody>
 </table>
-<div class="pagging-options">
-  <button style="margin-right: 20px;" (click)="goToPage(1)" [disabled]="currentPageIndex === 1">First</button>
-  <button style="margin-right: 50px;" (click)="previousPage()" [disabled]="currentPageIndex === 1"><-- Previous page</button>
+<div>
+  <div class="pagging-options">
+    <button style="margin-right: 20px;" (click)="goToPage(1)" [disabled]="pageIndex === 1">First</button>
+    <button style="margin-right: 20px;" (click)="previousPage()" [disabled]="pageIndex === 1"><-- Previous
+        page</button>
 
-  <div>
-    <span>Page: {{currentPageIndex}} from {{pagesCount}} </span>
+        <div>
+          <span>Page: {{pageIndex}} from {{pagesCount}} </span>
+        </div>
+
+        <button style="margin-left: 20px;" (click)="nextPage()" [disabled]="pageIndex === pagesCount">Next page--></button>
+        <button style="margin-left: 20px;" (click)="goToPage(0)"
+          [disabled]="pageIndex === pagesCount">Last</button>
+  </div>
+  <div class="pagging-options">
+    <div style="margin-left: 20px;">
+      <span>Records per page: </span>
+      <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange($event)">
+        <option *ngFor="let option of pageSizeOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+
+    <div style="margin-left: 20px;">
+      <span>Sort column : </span>
+      <select [(ngModel)]="sortColumn" (ngModelChange)="onSortColumnChange($event)">
+        <option *ngFor="let option of sortColumnOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
+
+    <div style="margin-left: 20px;">
+      <span>Sort order : </span>
+      <select [(ngModel)]="sortOrder" (ngModelChange)="onSortOrderChange($event)">
+        <option *ngFor="let option of sortOrderOptions" [value]="option">{{ option }}</option>
+      </select>
+    </div>
   </div>
 
-  <div style="margin-left: 20px;">
-    <span>Records per page: </span>
-    <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange($event)">
-      <option *ngFor="let option of pageSizeOptions" [value]="option">{{ option }}</option>
-    </select>
-  </div>
-
-  <button style="margin-left: 50px;" (click)="nextPage()" [disabled]="currentPageIndex === pagesCount">Next page --></button>
-  <button style="margin-left: 20px;" (click)="goToPage(0)" [disabled]="currentPageIndex === pagesCount">Last</button>
 </div>
