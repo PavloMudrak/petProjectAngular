@@ -22,4 +22,8 @@ export class CustomerService {
         return this.http.get<Customer[]>(`https://localhost:7274/api/customer/search?searchTerm=${searchTerm}&pageSize=${pageSize}&pageIndex=${pageIndex}`);
     }
 
+    getPagesCount(searchTerm: string, pageSize: number, pageIndex: number) {
+        return this.http.get<number>(`https://localhost:7274/api/customer/pages?searchTerm=${searchTerm}&pageSize=${pageSize}&pageIndex=${pageIndex}`);
+    }
+
 }

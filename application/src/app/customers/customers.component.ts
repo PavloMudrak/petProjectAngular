@@ -32,29 +32,21 @@ export class CustomersComponent {
 
   ngOnInit() {
     this.getCustomersByOptions();
+    this.setPagesCount();
   }
 
   onSearchChange(searchTerm: string) {
     this.searchTerm = searchTerm;
     this.pageIndex = 0;
     this.getCustomersByOptions();
+    this.setPagesCount();
   }
 
 
   onPageSizeChange(newSize: number) {
     this.pageSize = newSize;
     this.getCustomersByOptions();
-  }
-
-
-  filterCustomers(searchTerm: string) {
-    if (this.searchTerm.length > 0) {
-      this.getCustomersByOptions();
-    }
-    else {
-      this.filteredCustomers = this.firstCustomers;
-    }
-
+    this.setPagesCount();
   }
 
   deleteCustomer(customerName: string) {
@@ -64,9 +56,10 @@ export class CustomersComponent {
   }
 
   public clearSearchTerm() {
-    
+    this.pageIndex = 1;
     this.searchTerm = "";
     this.getCustomersByOptions();
+    this.setPagesCount();
   }
 
   public nextPage() {
@@ -79,10 +72,25 @@ export class CustomersComponent {
     this.getCustomersByOptions();
   }
 
+  public goToPage(pageIndex: number) {
+    if (pageIndex == 1)
+      this.currentPageIndex = 1;
+    else
+      this.currentPageIndex = this.pagesCount;
+
+    this.getCustomersByOptions();
+  }
 
   private getCustomersByOptions() {
     this.svc.searchCustomers(this.searchTerm, this.pageSize, this.currentPageIndex).subscribe((result: Customer[]) => {
       this.filteredCustomers = result;
+    });
+  }
+
+  private setPagesCount()
+  {
+    this.svc.getPagesCount(this.searchTerm, this.pageSize, this.currentPageIndex).subscribe((result) => {
+      this.pagesCount = result;
     });
   }
 }

@@ -30,10 +30,11 @@
   </tbody>
 </table>
 <div class="pagging-options">
+  <button style="margin-right: 20px;" (click)="goToPage(1)" [disabled]="currentPageIndex === 1">First</button>
   <button style="margin-right: 50px;" (click)="previousPage()" [disabled]="currentPageIndex === 1"><-- Previous page</button>
 
   <div>
-    <span>Current page: {{this.currentPageIndex}} </span>
+    <span>Page: {{currentPageIndex}} from {{pagesCount}} </span>
   </div>
 
   <div style="margin-left: 20px;">
@@ -44,5 +45,5 @@
   </div>
 
   <button style="margin-left: 50px;" (click)="nextPage()" [disabled]="currentPageIndex === pagesCount">Next page --></button>
-
+  <button style="margin-left: 20px;" (click)="goToPage(0)" [disabled]="currentPageIndex === pagesCount">Last</button>
 </div>
