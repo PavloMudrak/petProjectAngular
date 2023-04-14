@@ -1,23 +1,51 @@
+
+
 <table class="customer-table">
-    <thead>
-      <tr>
-        <th class="customer-table-header">Name</th>
-        <th class="customer-table-header">Company Name</th>
-        <th class="customer-table-header">Phone</th>
-        <th class="customer-table-header">Email</th>
-        <th class="customer-table-header"></th>
-        <th class="customer-table-header"></th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let customer of customers">
-          <td>{{ customer.name }}</td>
-          <td>{{ customer.companyName }}</td>
-          <td>{{ customer.phone }}</td>
-          <td>{{ customer.email }}</td>
-          <td><button class="edit-button" id="edit-{{customer.name}}">Edit</button></td>
-          <td><button class="delete-button" id="delete-{{customer.name}}" (click)="deleteCustomer(customer.name)">Delete</button></td>
-        </tr>
-      </tbody>
-  </table>
-  
+  <thead>
+    <tr>
+      <th class="customer-table-header">Name</th>
+      <th class="customer-table-header">Company Name</th>
+      <th class="customer-table-header">Phone</th>
+      <th class="customer-table-header">Email</th>
+      <th class="customer-table-header"></th>
+      <th class="customer-table-header">
+        <div class="search-container">
+          <input class="search-input" [ngModel]="searchTerm" (ngModelChange)="onSearchChange($event)"
+            placeholder="Search customer">
+          <button class="clear-search-button" *ngIf="searchTerm" (click)="clearSearchTerm()">X</button>
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let customer of filteredCustomers | slice: pageIndex * pageSize:(pageIndex + 1) * pageSize">
+      <td >{{ customer.name }}</td>
+      <td >{{ customer.companyName }}</td>
+      <td >{{ customer.phone }}</td>
+      <td >{{ customer.email }}</td>
+      <td><button class="edit-button" id="edit-{{customer.name}}">Edit</button></td>
+      <td><button class="delete-button" id="delete-{{customer.name}}"
+          (click)="deleteCustomer(customer.name)">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+<div class="pagging-options">
+  <u style="margin-right: 50px;"> <-- Previous page</u>
+
+  <div>
+    <span>Current page: 1</span>
+    <!-- <select [(ngModel)]="pageSize">
+      <option *ngFor="let option of pageSizeOptions" [value]="option">{{ option }}</option>
+    </select> -->
+  </div>
+
+  <div style="margin-left: 20px;">
+    <span>Records per page: </span>
+    <select [(ngModel)]="pageSize" (ngModelChange)="onPageSizeChange($event)">
+      <option *ngFor="let option of pageSizeOptions" [value]="option">{{ option }}</option>
+    </select>
+  </div>
+
+  <u style="margin-left: 50px;">Next page --></u>
+
+</div>

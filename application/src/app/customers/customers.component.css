@@ -1,16 +1,18 @@
+/* Встановлюємо максимальну ширину таблиці та видаляємо зайві відступи */
 .customer-table {
     font-family: Arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     margin-top: 50px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
   
+  /* Встановлюємо стилі для заголовку таблиці */
   .customer-table-header {
     position: sticky;
-    top: 50px;
+    top: 0; /* замість top: 50px; */
     z-index: 1;
     background-color: #f2f2f2;
     color: #333;
@@ -20,6 +22,7 @@
     border-bottom: 2px solid #ccc;
   }
   
+  /* Встановлюємо стилі для клітинок таблиці */
   .customer-table td {
     padding: 10px;
     text-align: left;
@@ -27,25 +30,22 @@
     border-bottom: 1px solid #ccc;
   }
   
+  /* Додаємо стилі для парних рядків таблиці */
   .customer-table tr:nth-child(even) td {
     background-color: #f9f9f9;
   }
   
-  .customer-table tr:hover td {
+  /* Додаємо стилі для виділеного рядка таблиці */
+  .customer-table tr.selected td {
     background-color: #e6f7ff;
   }
   
-  .customer-table thead {
-    position: sticky;
-    top: 0;
-    z-index: 1;
-  }
-
-  .edit-button {
+  /* Збільшуємо розмір кнопок для редагування та видалення */
+  .edit-button, .delete-button {
     background-color: #4CAF50; /* Green */
     border: none;
     color: white;
-    padding: 10px 20px;
+    padding: 8px 16px; /* замість 10px 20px; */
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -53,17 +53,11 @@
     margin: 4px 2px;
     cursor: pointer;
   }
-  
-  .delete-button {
-    background-color: #f44336; /* Red */
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+
+  .pagging-options {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: center;
   }
   

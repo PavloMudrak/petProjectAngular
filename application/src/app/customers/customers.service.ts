@@ -16,7 +16,15 @@ export class CustomerService {
     public deleteCustomer(name: string): Observable<void> {
         const url = `https://localhost:7274/api/customer/${name}`;
         return this.http.delete<void>(url);
-      }
-      
+    }
+
+    searchCustomers(searchTerm: string, pageSize: number) {
+        return this.http.get<Customer[]>(`https://localhost:7274/api/customer/search?searchTerm=${searchTerm}&pageSize=${pageSize}`);
+    }
+
+    getFirstPage(pageSize: number) {
+        return this.http.get<Customer[]>(`https://localhost:7274/api/customer/search?pageSize=${pageSize}`);
+    }
+
 
 }
