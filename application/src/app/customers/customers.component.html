@@ -9,7 +9,7 @@
       <th class="customer-table-header">
         <div class="search-container">
           <input class="search-input" [ngModel]="searchTerm" (ngModelChange)="onSearchChange($event)"
-            placeholder="Search customer">
+            placeholder="Search customer(all fields)">
           <button class="clear-search-button" *ngIf="searchTerm" (click)="clearSearchTerm()">X</button>
         </div>
       </th>
@@ -32,14 +32,14 @@
     <button style="margin-right: 20px;" (click)="goToPage(1)" [disabled]="pageIndex === 1">First</button>
     <button style="margin-right: 20px;" (click)="previousPage()" [disabled]="pageIndex === 1"><-- Previous
         page</button>
-
         <div>
-          <span>Page: {{pageIndex}} from {{pagesCount}} </span>
+          <span *ngIf="!searchTerm">Page: {{pageIndex}} from {{pagesCount}} </span>
+          <span *ngIf="searchTerm" style="margin-right:23px;margin-left:23px ;">Page: {{pageIndex}}</span>
         </div>
 
-        <button style="margin-left: 20px;" (click)="nextPage()" [disabled]="pageIndex === pagesCount">Next page--></button>
+        <button style="margin-left: 20px;" (click)="nextPage()" [disabled]="pageIndex === pagesCount || filteredCustomers.length < pageSize">Next page--></button>
         <button style="margin-left: 20px;" (click)="goToPage(0)"
-          [disabled]="pageIndex === pagesCount">Last</button>
+          [disabled]="pageIndex === pagesCount || searchTerm">Last</button>
   </div>
   <div class="pagging-options">
     <div style="margin-left: 20px;">

@@ -31,7 +31,7 @@ export class CustomersComponent {
   pageSizeOptions: number[] = [5, 10];
   pageIndex: number = 1;
   pageSize: number = 0;
-  pagesCount = 10;
+  pagesCount = 0;
 
   constructor(private svc: CustomerService) { }
 
@@ -68,9 +68,11 @@ export class CustomersComponent {
 
   deleteCustomer(customerName: string) {
     this.svc.deleteCustomer(customerName).subscribe(() => {
-      this.filteredCustomers = this.filteredCustomers.filter(customer => customer.name !== customerName);
+      this.setPagesCount();
+      this.getCustomersByOptions();
+      
     });
-    this.setPagesCount();
+
   }
 
   public clearSearchTerm() {

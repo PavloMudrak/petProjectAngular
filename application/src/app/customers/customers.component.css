@@ -40,9 +40,24 @@
     background-color: #e6f7ff;
   }
   
+  .delete-button {
+    background-color: #af4c4c; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 16px; /* замість 10px 20px; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+
+
   /* Збільшуємо розмір кнопок для редагування та видалення */
-  .edit-button, .delete-button {
-    background-color: #4CAF50; /* Green */
+  .edit-button{
+    background-color: #32ad74; /* Green */
     border: none;
     color: white;
     padding: 8px 16px; /* замість 10px 20px; */
