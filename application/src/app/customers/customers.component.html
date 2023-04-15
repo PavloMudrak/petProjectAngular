@@ -30,16 +30,15 @@
 <div>
   <div class="pagging-options">
     <button style="margin-right: 20px;" (click)="goToPage(1)" [disabled]="pageIndex === 1">First</button>
-    <button style="margin-right: 20px;" (click)="previousPage()" [disabled]="pageIndex === 1"><-- Previous
-        page</button>
+    <button style="margin-right: 20px;" (click)="previousPage()" [disabled]="pageIndex === 1"><-- Previous page</button>
         <div>
-          <span *ngIf="!searchTerm">Page: {{pageIndex}} from {{pagesCount}} </span>
-          <span *ngIf="searchTerm" style="margin-right:23px;margin-left:23px ;">Page: {{pageIndex}}</span>
+          <span>Page: {{pageIndex}} from {{pagesCount}} </span>
         </div>
 
-        <button style="margin-left: 20px;" (click)="nextPage()" [disabled]="pageIndex === pagesCount || filteredCustomers.length < pageSize">Next page--></button>
+        <button style="margin-left: 20px;" (click)="nextPage()"
+          [disabled]="pageIndex === pagesCount || filteredCustomers.length < pageSize">Next page--></button>
         <button style="margin-left: 20px;" (click)="goToPage(0)"
-          [disabled]="pageIndex === pagesCount || searchTerm">Last</button>
+          [disabled]="pageIndex === pagesCount">Last</button>
   </div>
   <div class="pagging-options">
     <div style="margin-left: 20px;">

@@ -39,7 +39,6 @@ export class CustomersComponent {
     this.sortColumn = this.sortColumnOptions[0];
     this.pageSize = this.pageSizeOptions[1];
     this.getCustomersByOptions();
-    this.setPagesCount();
   }
 
   onSearchChange(searchTerm: string) {
@@ -52,7 +51,6 @@ export class CustomersComponent {
   onPageSizeChange(newSize: number) {
     this.pageSize = newSize;
     this.getCustomersByOptions();
-    this.setPagesCount();
   }
 
   onSortColumnChange(sortColumn: string) {
@@ -68,7 +66,6 @@ export class CustomersComponent {
 
   deleteCustomer(customerName: string) {
     this.svc.deleteCustomer(customerName).subscribe(() => {
-      this.setPagesCount();
       this.getCustomersByOptions();
       
     });
@@ -83,7 +80,6 @@ export class CustomersComponent {
 
   public nextPage() {
     this.pageIndex += 1;
-    console.log(this.pageIndex)
     this.getCustomersByOptions();
   }
 
@@ -101,14 +97,9 @@ export class CustomersComponent {
   }
 
   private getCustomersByOptions() {
-    this.svc.searchCustomers(this.searchTerm, this.pageSize, this.pageIndex, this.sortColumn, this.sortOrder).subscribe((result: Customer[]) => {
-      this.filteredCustomers = result;
-    });
-  }
-
-  private setPagesCount() {
-    this.svc.getPagesCount(this.pageSize).subscribe((result) => {
-      this.pagesCount = result;
+    this.svc.searchCustomers(this.searchTerm, this.pageSize, this.pageIndex, this.sortColumn, this.sortOrder).subscribe((result: any) => {
+      this.filteredCustomers = result.customers;
+      this.pagesCount = result.pagesCount;
     });
   }
 }

@@ -19,13 +19,8 @@ export class CustomerService {
     }
 
     searchCustomers(searchTerm: string, pageSize: number, pageIndex: number, sortColumn: string, sortOrder: string) {
-        return this.http.get<Customer[]>(
+        return this.http.get<any[]>(
             `https://localhost:7274/api/customer/search?searchTerm=${searchTerm}&pageSize=${pageSize}&pageIndex=${pageIndex}&sortColumn=${sortColumn}&sortOrder=${sortOrder}`
         );
     }
-
-    getPagesCount(pageSize: number) {
-        return this.http.get<number>(`https://localhost:7274/api/customer/pages?pageSize=${pageSize}`);
-    }
-
 }
