@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th class="customer-table-header">Name</th>
-      <th class="customer-table-header">Company Name</th>
+      <th class="customer-table-header">Company</th>
       <th class="customer-table-header">Phone</th>
       <th class="customer-table-header">Email</th>
       <th class="customer-table-header"></th>
@@ -18,7 +18,7 @@
   <tbody>
     <tr *ngFor="let customer of filteredCustomers">
       <td>{{ customer.name }}</td>
-      <td>{{ customer.companyName }}</td>
+      <td>{{ customer.company }}</td>
       <td>{{ customer.phone }}</td>
       <td>{{ customer.email }}</td>
       <td><button class="edit-button" id="edit-{{customer.name}}">Edit</button></td>
