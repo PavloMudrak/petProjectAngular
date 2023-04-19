@@ -12,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CustomerDetailsComponent implements OnInit {
   customer!: Customer;
   customerForm!: FormGroup;
-  isEditModeActive: boolean = false;
+  isEditModeActive: boolean = true;
   customerUniqueName: string = '';
   validationsErrors: string[] = [];
 
@@ -88,12 +88,11 @@ export class CustomerDetailsComponent implements OnInit {
           error => console.error(error));
     }
     else {
-
+      this.isEditModeActive = false;
       const emptyCustomer: Customer = { name: '', company: '', phone: '', email: '' };
       this.customer = emptyCustomer;
 
     }
-    this.isEditModeActive = false;
   }
 }
 
