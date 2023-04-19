@@ -18,6 +18,10 @@ export class CustomerService {
         return this.http.delete<void>(url);
     }
 
+    public getCustomerByName(name: string) {
+        return this.http.get<Customer>(`https://localhost:7274/api/customer/${name}`);
+    }
+
     searchCustomers(searchTerm: string, pageSize: number, pageIndex: number, sortColumn: string, sortOrder: string) {
         return this.http.get<any[]>(
             `https://localhost:7274/api/customer/search?searchTerm=${searchTerm}&pageSize=${pageSize}&pageIndex=${pageIndex}&sortColumn=${sortColumn}&sortOrder=${sortOrder}`

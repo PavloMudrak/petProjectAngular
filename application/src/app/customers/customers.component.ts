@@ -5,18 +5,20 @@ import { CustomerService } from './customers.service';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatPaginator } from '@angular/material/paginator';
 import { trigger } from '@angular/animations';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CustomerDetailsComponent } from '../customer-details/customer-details.component';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { MatDialog } from '@angular/material/dialog';
+import { CustomerDetailsService, CustomerEditCreateMode } from '../customer-details/customer-details.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.css'],
-  animations: [
-    trigger('transitionMessages', [
-      // Опис анімації тут...
-    ])
-  ]
+  styleUrls: ['./customers.component.css']
 })
 export class CustomersComponent {
+
   title = 'Customer.UI';
   searchTerm: string = '';
 
@@ -33,7 +35,9 @@ export class CustomersComponent {
   pageSize: number = 0;
   pagesCount = 0;
 
-  constructor(private svc: CustomerService) { }
+  constructor(private svc: CustomerService,
+    private router: Router,
+    private dataService : CustomerDetailsService) { }
 
   ngOnInit() {
     this.sortColumn = this.sortColumnOptions[0];
@@ -94,6 +98,16 @@ export class CustomersComponent {
     else
       this.pageIndex = this.pagesCount;
     this.getCustomersByOptions();
+  }
+
+
+  editOrCreateCustomer(customerName: string, creationMod : boolean) {
+    let nextPageData: CustomerEditCreateMode = {
+      isEditMode: creationMod,
+      customerName: customerName
+    };
+    this.dataService.setData(nextPageData);
+    this.router.navigate(['/customers', nextPageData.customerName, 'edit']);
   }
 
   private getCustomersByOptions() {

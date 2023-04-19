@@ -1,0 +1,50 @@
+<form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="form-container" style="margin-top: 50px;">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" formControlName="name" class="form-control">
+        <small class="text-danger" *ngIf="customerForm?.get('name')?.hasError('required')">
+            Name is required.
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="company">Company:</label>
+        <input type="text" id="company" formControlName="company" class="form-control">
+        <small class="text-danger" *ngIf="customerForm?.get('company')?.hasError('required')">
+            Company is required.
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" formControlName="phone" class="form-control">
+        <small class="text-danger" *ngIf="customerForm?.get('phone')?.hasError('required')">
+            Phone is required.
+        </small>
+        <small class="text-danger" *ngIf="customerForm?.get('phone')?.hasError('minlength')">
+            The length should be 9.
+        </small>
+        <small class="text-danger" *ngIf="customerForm?.get('phone')?.hasError('maxlength')">
+            The length should be 9.
+        </small>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" class="form-control">
+        <small class="text-danger" *ngIf="customerForm?.get('email')?.hasError('required')">
+            Email is required.
+        </small>
+        <small class="text-danger" *ngIf="customerForm?.get('email')?.hasError('email')">
+            Wrong format.
+        </small>
+    </div>
+
+    <div *ngIf="this.isEditModeActive" class="form-group">
+        <button type="submit"  [disabled]="customerForm.invalid"
+            [ngClass]="{'disabled-btn': customerForm.invalid}" class="btn btn-primary">Edit Customer</button>
+    </div>
+    <div *ngIf="!this.isEditModeActive" class="form-group">
+        <button type="submit" [disabled]="customerForm.invalid"
+            [ngClass]="{'disabled-btn': customerForm.invalid}" class="btn btn-primary">Create Customer</button>
+    </div>
+</form>

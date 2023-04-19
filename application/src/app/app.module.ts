@@ -6,16 +6,19 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomersComponent } from './customers/customers.component';
 import { TopmenuComponent } from './topmenu/topmenu.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomersComponent,
-    TopmenuComponent
+    TopmenuComponent,
+    CustomerDetailsComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule ,
     FormsModule,
     MatPaginatorModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

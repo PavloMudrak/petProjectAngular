@@ -21,7 +21,7 @@
       <td>{{ customer.company }}</td>
       <td>{{ customer.phone }}</td>
       <td>{{ customer.email }}</td>
-      <td><button class="edit-button" id="edit-{{customer.name}}">Edit</button></td>
+      <td><button class="edit-button" id="edit-{{customer.name}}" (click)="editOrCreateCustomer(customer.name, true)">Edit</button></td>
       <td><button class="delete-button" id="delete-{{customer.name}}"
           (click)="deleteCustomer(customer.name)">Delete</button></td>
     </tr>
