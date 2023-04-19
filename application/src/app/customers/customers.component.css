@@ -1,4 +1,4 @@
-/* Встановлюємо максимальну ширину таблиці та видаляємо зайві відступи */
+
 .customer-table {
     font-family: Arial, sans-serif;
     border-collapse: collapse;
@@ -9,10 +9,9 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
   
-  /* Встановлюємо стилі для заголовку таблиці */
   .customer-table-header {
     position: sticky;
-    top: 0; /* замість top: 50px; */
+    top: 0; 
     z-index: 1;
     background-color: #f2f2f2;
     color: #333;
@@ -22,7 +21,6 @@
     border-bottom: 2px solid #ccc;
   }
   
-  /* Встановлюємо стилі для клітинок таблиці */
   .customer-table td {
     padding: 10px;
     text-align: left;
@@ -30,21 +28,19 @@
     border-bottom: 1px solid #ccc;
   }
   
-  /* Додаємо стилі для парних рядків таблиці */
   .customer-table tr:nth-child(even) td {
     background-color: #f9f9f9;
   }
   
-  /* Додаємо стилі для виділеного рядка таблиці */
   .customer-table tr.selected td {
     background-color: #e6f7ff;
   }
   
   .delete-button {
-    background-color: #af4c4c; /* Green */
+    background-color: #af4c4c;
     border: none;
     color: white;
-    padding: 8px 16px; /* замість 10px 20px; */
+    padding: 8px 16px; 
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -54,13 +50,11 @@
   }
 
 
-
-  /* Збільшуємо розмір кнопок для редагування та видалення */
   .edit-button{
-    background-color: #32ad74; /* Green */
+    background-color: #32ad74;
     border: none;
     color: white;
-    padding: 8px 16px; /* замість 10px 20px; */
+    padding: 8px 16px; 
     text-align: center;
     text-decoration: none;
     display: inline-block;

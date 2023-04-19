@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Customer } from '../Customer';
-import { DataService } from '../data.service';
 import { CustomerService } from './customers.service';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatPaginator } from '@angular/material/paginator';

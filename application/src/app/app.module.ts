@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
     AppComponent,
     CustomersComponent,
     TopmenuComponent,
-    CustomerDetailsComponent
+    CustomerDetailsComponent,
+    AboutComponent
     
   ],
   imports: [

@@ -50,3 +50,7 @@ background-color: #0069d9;
 .text-danger {
   color: red;
 }
+
+.ml-2 {
+  margin-left: 320px;
+}

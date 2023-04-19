@@ -63,6 +63,10 @@ export class CustomerDetailsComponent implements OnInit {
     }
   }
 
+  goBack() {
+    this.router.navigate(['/customers']);
+  }
+
   private updateCustomerFromForm() {
     this.customer.name = this.customerForm.get('name')?.value;
     this.customer.company = this.customerForm.get('company')?.value;

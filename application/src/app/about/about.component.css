@@ -1,0 +1,38 @@
+.project-description {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    text-align: justify;
+  }
+  
+  .project-description h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .project-description p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .project-description {
+      padding: 10px;
+    }
+    
+    .project-description h2 {
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+    
+    .project-description p {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+  }
+  
