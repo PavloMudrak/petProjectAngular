@@ -31,4 +31,8 @@ export class CustomerService {
     public updateCustomer(name: string, customer: Customer) {
         return this.http.put(`https://localhost:7274/api/customer/${name}`, customer);
     }
+
+    public createCustomer(customer: Customer) {
+        return this.http.post(`https://localhost:7274/api/customer`, customer);
+    }
 }

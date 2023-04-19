@@ -43,27 +43,31 @@ export class CustomerDetailsComponent implements OnInit {
 
   onSubmit() {
     this.updateCustomerFromForm()
-    if(this.isEditModeActive)
-    {
+    if (this.isEditModeActive) {
       this.svc.updateCustomer(this.customerUniqueName, this.customer)
-      .subscribe(() => {
-        this.router.navigate(['/customers']);
-      }, error => {
-        this.validationsErrors = error.error.map((e: { errorMessage: any; }) => e.errorMessage);
-        console.error(this.validationsErrors);
-      });
+        .subscribe(() => {
+          this.router.navigate(['/customers']);
+        }, error => {
+          this.validationsErrors = error.error.map((e: { errorMessage: any; }) => e.errorMessage);
+          console.error(this.validationsErrors);
+        });
     }
-    else{
-      console.log("created")
+    else {
+      this.svc.createCustomer(this.customer)
+        .subscribe(() => {
+          this.router.navigate(['/customers']);
+        }, error => {
+          this.validationsErrors = error.error.map((e: { errorMessage: any; }) => e.errorMessage);
+          console.error(this.validationsErrors);
+        });
     }
   }
 
-  private updateCustomerFromForm()
-  {
-      this.customer.name = this.customerForm.get('name')?.value;
-      this.customer.company = this.customerForm.get('company')?.value;
-      this.customer.phone = this.customerForm.get('phone')?.value;
-      this.customer.email = this.customerForm.get('email')?.value;
+  private updateCustomerFromForm() {
+    this.customer.name = this.customerForm.get('name')?.value;
+    this.customer.company = this.customerForm.get('company')?.value;
+    this.customer.phone = this.customerForm.get('phone')?.value;
+    this.customer.email = this.customerForm.get('email')?.value;
   }
 
   private setCustomer(): void {
@@ -84,8 +88,13 @@ export class CustomerDetailsComponent implements OnInit {
           error => console.error(error));
     }
     else {
-      this.isEditModeActive = false;
+
+      const emptyCustomer: Customer = { name: '', company: '', phone: '', email: '' };
+      this.customer = emptyCustomer;
+
     }
+    this.isEditModeActive = false;
   }
 }
+
 
