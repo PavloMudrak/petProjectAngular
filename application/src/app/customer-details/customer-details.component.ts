@@ -49,7 +49,6 @@ export class CustomerDetailsComponent implements OnInit {
           this.router.navigate(['/customers']);
         }, error => {
           this.validationsErrors = error.error.map((e: { errorMessage: any; }) => e.errorMessage);
-          console.error(this.validationsErrors);
         });
     }
     else {
@@ -58,7 +57,6 @@ export class CustomerDetailsComponent implements OnInit {
           this.router.navigate(['/customers']);
         }, error => {
           this.validationsErrors = error.error.map((e: { errorMessage: any; }) => e.errorMessage);
-          console.error(this.validationsErrors);
         });
     }
   }
