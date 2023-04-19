@@ -23,9 +23,8 @@ export class CustomerService {
     }
 
     searchCustomers(searchTerm: string, pageSize: number, pageIndex: number, sortColumn: string, sortOrder: string) {
-        return this.http.get<any[]>(
-            `https://localhost:7274/api/customers?searchTerm=${searchTerm}&pageSize=${pageSize}&pageIndex=${pageIndex}&sortColumn=${sortColumn}&sortOrder=${sortOrder}`
-        );
+        const url = `https://localhost:7274/api/customers?query=${searchTerm}&pageSize=${pageSize}&pageIndex=${pageIndex}&sortColumn=${sortColumn}&sortOrder=${sortOrder}`;
+        return this.http.get<SearchCustomersResponse>(url);
     }
 
     public updateCustomer(name: string, customer: Customer) {
@@ -36,3 +35,9 @@ export class CustomerService {
         return this.http.post(`https://localhost:7274/api/customers`, customer);
     }
 }
+
+export interface SearchCustomersResponse {
+    customers: Customer[];
+    pagesCount: number;
+}
+

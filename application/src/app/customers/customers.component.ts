@@ -22,7 +22,7 @@ export class CustomersComponent {
 
   sortColumn: string = 'Name';
   sortOrder: string = 'ASC';
-  sortColumnOptions: string[] = ["Name", "CompanyName", "Phone", "Email"];
+  sortColumnOptions: string[] = ["Name", "CompanyName", "Phone", "EmailAddress"];
   sortOrderOptions: string[] = ["ASC", "DESC"];
 
   firstCustomers: Customer[] = [];
