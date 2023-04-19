@@ -21,10 +21,10 @@
             Phone is required.
         </small>
         <small class="text-danger" *ngIf="customerForm?.get('phone')?.hasError('minlength')">
-            The length should be 9.
+            Phone must be a 9-digit number.
         </small>
         <small class="text-danger" *ngIf="customerForm?.get('phone')?.hasError('maxlength')">
-            The length should be 9.
+            Phone must be a 9-digit number.
         </small>
     </div>
 
@@ -47,4 +47,9 @@
         <button type="submit" [disabled]="customerForm.invalid"
             [ngClass]="{'disabled-btn': customerForm.invalid}" class="btn btn-primary">Create Customer</button>
     </div>
+    <div *ngIf="validationsErrors && validationsErrors.length > 0" class="alert alert-danger">
+        <ul>
+          <li *ngFor="let error of validationsErrors" class="text-danger">{{ error }}</li>
+        </ul>
+      </div>
 </form>

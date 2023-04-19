@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Customer } from '../Customer';
 import { CustomerService } from '../customers/customers.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CustomerDetailsService } from './customer-details.service';
 
 @Component({
   selector: 'app-customer-details',
@@ -12,37 +11,65 @@ import { CustomerDetailsService } from './customer-details.service';
 })
 export class CustomerDetailsComponent implements OnInit {
   customer!: Customer;
-  customerForm: FormGroup;
+  customerForm!: FormGroup;
   isEditModeActive: boolean = false;
+  customerUniqueName: string = '';
+  validationsErrors: string[] = [];
+
 
   constructor(private formBuilder: FormBuilder,
     private svc: CustomerService,
     private router: Router,
-    private route: ActivatedRoute,
-    private dataService: CustomerDetailsService) {
+    private route: ActivatedRoute) {
+    //this.customerForm = this.formBuilder.group({
+    //  name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
+    //  company: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
+    //  phone: ['', [Validators.required, Validators.minLength(4), Validators.minLength(9), Validators.maxLength(9)]],
+    //  email: ['', [Validators.required, Validators.email, Validators.minLength(4), Validators.maxLength(30)]]
+    //});
     this.customerForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
-      company: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(30)]],
-      phone: ['', [Validators.required, Validators.minLength(4), Validators.minLength(9), Validators.maxLength(9)]],
-      email: ['', [Validators.required, Validators.email, Validators.minLength(4), Validators.maxLength(30)]]
+      name: ['', [Validators.required]],
+      company: ['', [Validators.required]],
+      phone: ['', [Validators.required]],
+      email: ['', [Validators.required]]
     });
   }
 
   ngOnInit(): void {
     this.setCustomer();
-
   }
 
   get form() { return this.customerForm.controls; }
 
   onSubmit() {
-    console.log(this.customerForm.value);
+    this.updateCustomerFromForm()
+    if(this.isEditModeActive)
+    {
+      this.svc.updateCustomer(this.customerUniqueName, this.customer)
+      .subscribe(() => {
+        this.router.navigate(['/customers']);
+      }, error => {
+        this.validationsErrors = error.error.map((e: { errorMessage: any; }) => e.errorMessage);
+        console.error(this.validationsErrors);
+      });
+    }
+    else{
+      console.log("created")
+    }
   }
 
+  private updateCustomerFromForm()
+  {
+      this.customer.name = this.customerForm.get('name')?.value;
+      this.customer.company = this.customerForm.get('company')?.value;
+      this.customer.phone = this.customerForm.get('phone')?.value;
+      this.customer.email = this.customerForm.get('email')?.value;
+  }
 
   private setCustomer(): void {
     const customerName = this.route.snapshot.paramMap.get('name');
     if (customerName !== null) {
+      this.customerUniqueName = customerName;
       this.isEditModeActive = true;
       this.svc.getCustomerByName(customerName)
         .subscribe(customer => {
@@ -56,10 +83,9 @@ export class CustomerDetailsComponent implements OnInit {
         },
           error => console.error(error));
     }
-    else{
+    else {
       this.isEditModeActive = false;
     }
-    console.log(this.isEditModeActive)
   }
 }
 

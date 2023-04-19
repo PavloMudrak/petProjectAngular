@@ -9,7 +9,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerDetailsComponent } from '../customer-details/customer-details.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MatDialog } from '@angular/material/dialog';
-import { CustomerDetailsService, CustomerEditCreateMode } from '../customer-details/customer-details.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -36,8 +35,7 @@ export class CustomersComponent {
   pagesCount = 0;
 
   constructor(private svc: CustomerService,
-    private router: Router,
-    private dataService : CustomerDetailsService) { }
+    private router: Router) { }
 
   ngOnInit() {
     this.sortColumn = this.sortColumnOptions[0];
@@ -101,13 +99,8 @@ export class CustomersComponent {
   }
 
 
-  editOrCreateCustomer(customerName: string, creationMod : boolean) {
-    let nextPageData: CustomerEditCreateMode = {
-      isEditMode: creationMod,
-      customerName: customerName
-    };
-    this.dataService.setData(nextPageData);
-    this.router.navigate(['/customers', nextPageData.customerName, 'edit']);
+  editCustomer(customerName: string) {
+    this.router.navigate(['/customers', customerName, 'edit']);
   }
 
   private getCustomersByOptions() {
